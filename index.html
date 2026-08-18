@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy 27th Birthday — Cinnamon Roll</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page" id="page">
+    <!-- Background speckles + stars -->
+    <canvas id="bg-canvas" class="bg-canvas"></canvas>
+
+    <!-- Persistent controls -->
+    <div class="controls">
+      <button id="music-toggle" class="control-btn" aria-pressed="false" title="Toggle music">♪ Music</button>
+      <button id="replay" class="control-btn" title="Replay">↺ Replay</button>
+    </div>
+
+    <!-- Overlay Intro -->
+    <div id="intro" class="overlay center-stage">
+      <h1>Hi baby, guess this?</h1>
+      <p class="sub">A little surprise... press Start when you're ready 💕</p>
+      <button id="start" class="big-btn">Start</button>
+    </div>
+
+    <!-- Main stage container -->
+    <main id="stage-root" class="stage-root">
+      <!-- HAPPY BIRTHDAY banner (stage 1) -->
+      <div id="banner" class="banner hidden">H A P P Y &nbsp; B I R T H D A Y !</div>
+
+      <!-- Character area -->
+      <section id="scene" class="scene">
+        <!-- Friends group -->
+        <div id="friends" class="friends"></div>
+
+        <!-- Cinnamon Roll character -->
+        <div id="cinnamon" class="cinnamon">
+          <!-- SVG of the Cinnamon Roll -->
+          <svg id="cinn-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- soft blue outline, white fill -->
+            <defs>
+              <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="0.6" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Ears -->
+            <ellipse cx="50" cy="120" rx="48" ry="84" fill="#fff" stroke="#5aa6e6" stroke-width="6" filter="url(#soft)"/>
+            <ellipse cx="250" cy="120" rx="48" ry="84" fill="#fff" stroke="#5aa6e6" stroke-width="6" filter="url(#soft)"/>
+
+            <!-- Head -->
+            <circle cx="150" cy="120" r="80" fill="#fff" stroke="#5aa6e6" stroke-width="6"/>
+
+            <!-- Body -->
+            <ellipse cx="150" cy="220" rx="70" ry="55" fill="#fff" stroke="#5aa6e6" stroke-width="5"/>
+
+            <!-- Tail -->
+            <path d="M220 245 q20 -10 30 -30 q-8 12 -28 18 q-10 8 -2 12" fill="none" stroke="#5aa6e6" stroke-width="5" stroke-linecap="round"/>
+
+            <!-- Eyes -->
+            <ellipse cx="130" cy="110" rx="10" ry="16" fill="#7dbef0"/>
+            <ellipse cx="170" cy="110" rx="10" ry="16" fill="#7dbef0"/>
+
+            <!-- Mouth (soft w) -->
+            <path id="mouth" d="M135 135 q15 18 30 0" stroke="#7dbef0" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M150 131 q6 6 12 0" stroke="#7dbef0" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+            <!-- Blush -->
+            <ellipse cx="115" cy="130" rx="12" ry="8" fill="#ffd0de" opacity="0.95"/>
+            <ellipse cx="185" cy="130" rx="12" ry="8" fill="#ffd0de" opacity="0.95"/>
+
+            <!-- Microphone (hidden until singing) -->
+            <g id="micro" transform="translate(115,155)" opacity="0">
+              <rect x="38" y="-8" width="12" height="36" rx="6" fill="#7dbef0" />
+              <circle cx="44" cy="-10" r="8" fill="#fff" stroke="#7dbef0" stroke-width="3"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Cake holder (varies by stage) -->
+        <div id="cake-holder" class="cake-holder"></div>
+
+        <!-- Particle container -->
+        <div id="particles" class="particles" aria-hidden="true"></div>
+
+        <!-- Stage-specific overlays/messages -->
+        <div id="stage-msg" class="stage-msg"></div>
+      </section>
+    </main>
+
+    <!-- Final message modal (stage 5) -->
+    <div id="final" class="overlay hidden">
+      <div class="final-card">
+        <h2>Happy 27th Birthday, my gorgeous wife! ❤️</h2>
+        <p class="message">
+          I’ve been so incredibly happy and grateful since you came into my life. Thank you for being my safe place, my home, and my happiness.
+          You deserve every beautiful thing this world has to offer. All I ever wish for you is good health, genuine happiness,
+          and for this new chapter of your life to bring you closer to your dreams.
+        </p>
+        <p class="message">
+          I will always support you and stand beside you through whatever phase, every dream, and in everything.
+          Happy 27th Birthday, my love. I love you bebiii more than you know and will always love you. ❤️
+        </p>
+        <button id="close-final" class="big-btn">Close</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <small>Made with love 💗 — Play music and allow mic for interactive candles.</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
