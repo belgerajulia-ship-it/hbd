@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#8ed8f7">
+
+<title>Happy Birthday, My Love ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Pacifico&display=swap');
+
+:root{
+    --blue:#8ed8f7;
+    --deep-blue:#389bd1;
+    --sky:#c9f1ff;
+    --white:#fff;
+    --pink:#ffb7d5;
+    --dark:#286c98;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:"Baloo 2",sans-serif;
+    background:#8ed8f7;
+    color:white;
+}
+
+button{
+    font-family:inherit;
+}
+
+/* =====================================================
+   GLOBAL SCENE
+===================================================== */
+
+#app{
+    width:100%;
+    height:100%;
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(255,255,255,.5),transparent 18%),
+        radial-gradient(circle at 80% 30%,rgba(255,255,255,.35),transparent 20%),
+        linear-gradient(180deg,#74c9ee 0%,#a7e5fa 60%,#d9f7ff 100%);
+}
+
+.scene{
+    position:absolute;
+    inset:0;
+    display:none;
+    overflow:hidden;
+}
+
+.scene.active{
+    display:block;
+}
+
+/* =====================================================
+   BACKGROUND STARS
+===================================================== */
+
+.sky-stars{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.star{
+    position:absolute;
+    width:5px;
+    height:5px;
+    background:white;
+    border-radius:50%;
+    opacity:.8;
+    animation:twinkle 2s infinite ease-in-out;
+}
+
+.star.big{
+    width:15px;
+    height:15px;
+    border-radius:0;
+    background:transparent;
+}
+
+.star.big:before,
+.star.big:after{
+    content:"";
+    position:absolute;
+    background:white;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+
+.star.big:before{
+    width:4px;
+    height:22px;
+    border-radius:50%;
+}
+
+.star.big:after{
+    width:22px;
+    height:4px;
+    border-radius:50%;
+}
+
+@keyframes twinkle{
+    0%,100%{opacity:.3;transform:scale(.7)}
+    50%{opacity:1;transform:scale(1.3)}
+}
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+#intro{
+    z-index:100;
+    background:
+        radial-gradient(circle at 50% 35%,rgba(255,255,255,.35),transparent 30%),
+        linear-gradient(180deg,#75c9ed,#b8ecfc);
+}
+
+.intro-content{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:5;
+}
+
+.intro-character{
+    width:min(55vw,330px);
+    filter:
+        drop-shadow(0 25px 25px rgba(37,123,166,.25))
+        drop-shadow(0 0 25px rgba(255,255,255,.35));
+    animation:
+        introFloat 3s ease-in-out infinite,
+        introAppear 1.6s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes introAppear{
+    from{
+        opacity:0;
+        transform:translateY(100px) scale(.5);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@keyframes introFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-15px)}
+}
+
+.intro-title{
+    margin-top:20px;
+    font-family:Pacifico,cursive;
+    font-size:clamp(3rem,10vw,7rem);
+    text-shadow:
+        0 4px 0 rgba(55,141,187,.3),
+        0 0 25px rgba(255,255,255,.7);
+    animation:titleGlow 2s infinite alternate;
+}
+
+@keyframes titleGlow{
+    from{filter:brightness(1)}
+    to{filter:brightness(1.25)}
+}
+
+.intro-sub{
+    margin-top:8px;
+    font-size:clamp(1rem,3vw,1.5rem);
+    opacity:.9;
+}
+
+.start-btn{
+    margin-top:30px;
+    border:none;
+    padding:15px 34px;
+    border-radius:999px;
+    background:white;
+    color:#369bd0;
+    font-weight:800;
+    font-size:1.05rem;
+    cursor:pointer;
+    box-shadow:
+        0 10px 25px rgba(32,113,157,.25),
+        0 0 30px rgba(255,255,255,.5);
+    transition:.3s;
+}
+
+.start-btn:hover{
+    transform:translateY(-4px) scale(1.05);
+}
+
+.start-btn:active{
+    transform:scale(.94);
+}
+
+/* =====================================================
+   COMMON CHARACTER
+===================================================== */
+
+.character{
+    position:absolute;
+    width:min(38vw,360px);
+    max-height:65vh;
+    object-fit:contain;
+    object-position:center;
+    filter:
+        drop-shadow(0 20px 18px rgba(36,128,171,.25))
+        drop-shadow(0 0 18px rgba(255,255,255,.25));
+    user-select:none;
+}
+
+/* =====================================================
+   STAGE 1
+===================================================== */
+
+#stage1{
+    background:
+        radial-gradient(circle at 50% 15%,rgba(255,255,255,.55),transparent 20%),
+        linear-gradient(#82d1f1,#bceefe);
+}
+
+.stage-label{
+    position:absolute;
+    top:25px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:8px 18px;
+    border-radius:999px;
+    background:rgba(255,255,255,.25);
+    border:1px solid rgba(255,255,255,.5);
+    backdrop-filter:blur(10px);
+    font-size:.8rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    z-index:10;
+}
+
+.stage1-title{
+    position:absolute;
+    top:10%;
+    width:100%;
+    text-align:center;
+    font-family:Pacifico,cursive;
+    font-size:clamp(2.8rem,9vw,6.5rem);
+    text-shadow:0 5px 0 rgba(48,143,191,.25);
+    animation:birthdayPop 1.5s cubic-bezier(.17,.89,.32,1.49);
+}
+
+@keyframes birthdayPop{
+    0%{opacity:0;transform:translateY(-80px) scale(.3)}
+    70%{transform:translateY(10px) scale(1.12)}
+    100%{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.stage1-character{
+    left:50%;
+    bottom:8%;
+    transform:translateX(-50%);
+    animation:characterBounce 2.5s ease-in-out infinite;
+}
+
+@keyframes characterBounce{
+    0%,100%{margin-bottom:0}
+    50%{margin-bottom:12px}
+}
+
+/* Cake */
+
+.cake{
+    position:absolute;
+    left:50%;
+    bottom:11%;
+    transform:translateX(-50%);
+    width:145px;
+    height:100px;
+    z-index:3;
+}
+
+.cake-top{
+    position:absolute;
+    left:0;
+    bottom:40px;
+    width:145px;
+    height:60px;
+    background:linear-gradient(#fff,#fce5ee);
+    border-radius:18px 18px 12px 12px;
+    box-shadow:0 8px 0 #f3b6cf;
+}
+
+.cake-top:before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:20px;
+    background:#ffb9d6;
+    border-radius:50%;
+}
+
+.cake-bottom{
+    position:absolute;
+    bottom:0;
+    left:10px;
+    width:125px;
+    height:50px;
+    background:#8ccff0;
+    border-radius:10px 10px 20px 20px;
+    box-shadow:0 7px 0 #55a9d6;
+}
+
+.candle{
+    position:absolute;
+    width:9px;
+    height:35px;
+    background:white;
+    border-radius:4px;
+    bottom:94px;
+}
+
+.candle:nth-child(1){left:35px}
+.candle:nth-child(2){left:68px}
+.candle:nth-child(3){left:101px}
+
+.flame{
+    position:absolute;
+    width:15px;
+    height:22px;
+    background:#fff4a5;
+    border-radius:50% 50% 50% 50%;
+    bottom:125px;
+    animation:flame 0.7s infinite alternate;
+    box-shadow:0 0 18px #fff;
+}
+
+.flame:nth-child(4){left:32px}
+.flame:nth-child(5){left:65px}
+.flame:nth-child(6){left:98px}
+
+@keyframes flame{
+    from{transform:scale(.85) rotate(-4deg)}
+    to{transform:scale(1.1) rotate(4deg)}
+}
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+.confetti-container{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:20;
+}
+
+.confetti{
+    position:absolute;
+    top:-30px;
+    width:9px;
+    height:18px;
+    animation:confettiFall linear forwards;
+}
+
+@keyframes confettiFall{
+    0%{
+        transform:translateY(-50px) rotate(0deg);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:.9;
+    }
+}
+
+/* =====================================================
+   STAGE 2 — THEATER
+===================================================== */
+
+#stage2{
+    background:
+        radial-gradient(circle at 50% 30%,rgba(255,255,255,.15),transparent 30%),
+        linear-gradient(180deg,#172a57,#080d24);
+}
+
+.curtain{
+    position:absolute;
+    top:-5%;
+    width:34%;
+    height:110%;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #d94c77 0 20px,
+            #9f315b 20px 40px
+        );
+    z-index:8;
+    box-shadow:0 0 40px rgba(0,0,0,.5);
+}
+
+.curtain.left{
+    left:-8%;
+    border-radius:0 0 80% 20%;
+    transform:skewX(7deg);
+}
+
+.curtain.right{
+    right:-8%;
+    border-radius:0 0 20% 80%;
+    transform:skewX(-7deg);
+}
+
+.spotlight{
+    position:absolute;
+    left:50%;
+    top:-10%;
+    width:40%;
+    height:120%;
+    transform:translateX(-50%);
+    background:linear-gradient(
+        180deg,
+        rgba(255,255,220,.4),
+        rgba(255,255,220,.05)
+    );
+    clip-path:polygon(35% 0,65% 0,100% 100%,0 100%);
+    animation:spotlight 3s infinite alternate;
+}
+
+@keyframes spotlight{
+    from{opacity:.5}
+    to{opacity:.9}
+}
+
+.theater-title{
+    position:absolute;
+    top:7%;
+    width:100%;
+    text-align:center;
+    font-family:Pacifico,cursive;
+    font-size:clamp(2.2rem,7vw,5rem);
+    z-index:10;
+    text-shadow:0 0 25px #fff;
+}
+
+.stage-floor{
+    position:absolute;
+    bottom:-10%;
+    left:10%;
+    width:80%;
+    height:35%;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #51325f 0 60px,
+            #42294f 60px 120px
+        );
+    transform:perspective(400px) rotateX(35deg);
+    border-radius:50%;
+}
+
+.singer{
+    left:50%;
+    bottom:12%;
+    transform:translateX(-50%);
+    width:min(38vw,350px);
+    animation:singerDance 1.4s ease-in-out infinite;
+    z-index:6;
+}
+
+@keyframes singerDance{
+    0%,100%{transform:translateX(-50%) rotate(-1deg)}
+    50%{transform:translateX(-50%) rotate(1deg) translateY(-7px)}
+}
+
+.microphone{
+    position:absolute;
+    left:calc(50% + 90px);
+    bottom:31%;
+    width:25px;
+    height:150px;
+    background:#343b47;
+    border-radius:20px;
+    transform:rotate(-12deg);
+    z-index:7;
+}
+
+.microphone:before{
+    content:"";
+    position:absolute;
+    top:-20px;
+    left:-10px;
+    width:45px;
+    height:55px;
+    border-radius:50%;
+    background:#202732;
+    box-shadow:inset 0 0 0 7px #657180;
+}
+
+.instrument{
+    position:absolute;
+    bottom:18%;
+    z-index:5;
+    font-size:clamp(3rem,7vw,5rem);
+    animation:instrumentBounce .8s infinite alternate;
+}
+
+.instrument.piano{left:12%}
+.instrument.drum{right:14%;animation-delay:.2s}
+.instrument.guitar{left:24%;bottom:11%;animation-delay:.4s}
+
+@keyframes instrumentBounce{
+    from{transform:translateY(0) rotate(-3deg)}
+    to{transform:translateY(-12px) rotate(3deg)}
+}
+
+.music-note{
+    position:absolute;
+    font-size:2rem;
+    animation:noteFloat 3s linear infinite;
+    opacity:0;
+}
+
+@keyframes noteFloat{
+    0%{
+        opacity:0;
+        transform:translateY(0) scale(.5);
+    }
+    20%{opacity:1}
+    100%{
+        opacity:0;
+        transform:translateY(-180px) translateX(80px) rotate(20deg);
+    }
+}
+
+/* =====================================================
+   STAGE 3
+===================================================== */
+
+#stage3{
+    background:
+        radial-gradient(circle at 50% 45%,#ffffff 0%,#dff8ff 20%,#8dd8f5 65%,#66bee5 100%);
+}
+
+.blow-title{
+    position:absolute;
+    top:7%;
+    width:100%;
+    text-align:center;
+    color:#3b91bd;
+    font-family:Pacifico,cursive;
+    font-size:clamp(2rem,7vw,5rem);
+    z-index:20;
+}
+
+.blow-instruction{
+    position:absolute;
+    bottom:8%;
+    left:50%;
+    transform:translateX(-50%);
+    color:#3187b4;
+    background:rgba(255,255,255,.75);
+    padding:12px 22px;
+    border-radius:999px;
+    backdrop-filter:blur(8px);
+    z-index:30;
+    white-space:nowrap;
+}
+
+.big-cake{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-45%) scale(.3);
+    width:min(90vw,700px);
+    height:min(60vw,500px);
+    opacity:0;
+    transition:transform 3s cubic-bezier(.16,.9,.2,1),opacity 1s;
+    z-index:10;
+}
+
+.big-cake.show{
+    opacity:1;
+    transform:translate(-50%,-45%) scale(1);
+}
+
+.cake-layer{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    border-radius:50%;
+}
+
+.layer1{
+    bottom:12%;
+    width:90%;
+    height:40%;
+    background:linear-gradient(#f6c6dc,#f7e4ec);
+    box-shadow:0 15px 0 #e6a9c5;
+}
+
+.layer2{
+    bottom:38%;
+    width:70%;
+    height:30%;
+    background:linear-gradient(#fff,#e8f7ff);
+    box-shadow:0 12px 0 #b7dced;
+}
+
+.icing{
+    position:absolute;
+    bottom:42%;
+    left:15%;
+    width:70%;
+    height:20%;
+    background:#fff;
+    border-radius:50%;
+}
+
+.candle-big{
+    position:absolute;
+    bottom:65%;
+    width:25px;
+    height:100px;
+    background:white;
+    border-radius:10px;
+}
+
+.candle-big:nth-child(4){left:32%}
+.candle-big:nth-child(5){left:48%}
+.candle-big:nth-child(6){left:64%}
+
+.flame-big{
+    position:absolute;
+    bottom:84%;
+    width:35px;
+    height:55px;
+    border-radius:50%;
+    background:#fff2a6;
+    box-shadow:0 0 35px #fff;
+    animation:flame 0.6s infinite alternate;
+}
+
+.flame-big:nth-child(7){left:30.5%}
+.flame-big:nth-child(8){left:46.5%}
+.flame-big:nth-child(9){left:62.5%}
+
+.blown .flame-big{
+    opacity:0;
+    transform:scale(.2);
+    transition:.5s;
+}
+
+.blown .cake-layer{
+    animation:cakeShake .6s;
+}
+
+@keyframes cakeShake{
+    0%,100%{transform:translateX(-50%)}
+    25%{transform:translateX(-52%)}
+    75%{transform:translateX(-48%)}
+}
+
+.blow-character{
+    width:220px;
+    left:50%;
+    bottom:-40px;
+    transform:translateX(-50%);
+    z-index:5;
+}
+
+/* =====================================================
+   STAGE 4
+===================================================== */
+
+#stage4{
+    background:
+        radial-gradient(circle at 50% 30%,#ffffff,transparent 20%),
+        linear-gradient(#8dd8f4,#c9f4ff);
+}
+
+.walkway{
+    position:absolute;
+    bottom:-15%;
+    left:50%;
+    width:40%;
+    height:80%;
+    transform:translateX(-50%) perspective(300px) rotateX(35deg);
+    background:linear-gradient(90deg,rgba(255,255,255,.2),rgba(255,255,255,.7),rgba(255,255,255,.2));
+    border-radius:50%;
+}
+
+.gift-title{
+    position:absolute;
+    top:7%;
+    width:100%;
+    text-align:center;
+    color:#398db8;
+    font-family:Pacifico,cursive;
+    font-size:clamp(2rem,7vw,5rem);
+    z-index:10;
+}
+
+.walker{
+    left:50%;
+    bottom:10%;
+    transform:translateX(-50%) scale(.65);
+    width:min(45vw,390px);
+    z-index:7;
+    animation:walkCloser 8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes walkCloser{
+    0%{
+        transform:translateX(-50%) scale(.55);
+        bottom:12%;
+    }
+    60%{
+        transform:translateX(-50%) scale(.8);
+        bottom:15%;
+    }
+    100%{
+        transform:translateX(-50%) scale(1.8);
+        bottom:-20%;
+    }
+}
+
+.bouquet{
+    position:absolute;
+    left:50%;
+    bottom:30%;
+    transform:translateX(-50%) scale(.4);
+    font-size:clamp(4rem,12vw,9rem);
+    z-index:12;
+    animation:bouquetPresent 7s ease forwards;
+}
+
+@keyframes bouquetPresent{
+    0%,40%{
+        opacity:0;
+        transform:translateX(-50%) scale(.2) translateY(80px);
+    }
+    55%{
+        opacity:1;
+        transform:translateX(-50%) scale(1) translateY(0);
+    }
+    72%{
+        opacity:1;
+        transform:translateX(-50%) scale(1) translateY(0);
+    }
+    100%{
+        opacity:0;
+        transform:translateX(-50%) scale(1.5) translateY(-30px);
+    }
+}
+
+.kiss-heart{
+    position:absolute;
+    left:50%;
+    top:50%;
+    font-size:7rem;
+    transform:translate(-50%,-50%) scale(0);
+    z-index:30;
+    opacity:0;
+}
+
+.kiss-heart.active{
+    animation:kiss 2.2s cubic-bezier(.17,.89,.32,1.49) forwards;
+}
+
+@keyframes kiss{
+    0%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(.1);
+    }
+    30%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translate(-50%,-70%) scale(3);
+    }
+}
+
+/* =====================================================
+   STAGE 5
+===================================================== */
+
+#stage5{
+    background:
+        radial-gradient(circle at 50% 30%,rgba(255,255,255,.4),transparent 30%),
+        linear-gradient(180deg,#78cbed,#bdefff);
+    overflow-y:auto;
+}
+
+.message-wrap{
+    position:absolute;
+    inset:0;
+    overflow-y:auto;
+    padding:70px 20px 140px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.message-card{
+    width:min(850px,94vw);
+    margin:auto;
+    padding:45px 35px;
+    border-radius:35px;
+    background:rgba(255,255,255,.84);
+    backdrop-filter:blur(18px);
+    box-shadow:
+        0 30px 80px rgba(43,126,167,.25),
+        inset 0 1px 0 white;
+    color:#3c7e9f;
+    text-align:center;
+    animation:messageAppear 2s cubic-bezier(.17,.89,.32,1.2);
+}
+
+@keyframes messageAppear{
+    from{
+        opacity:0;
+        transform:translateY(80px) scale(.85);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.message-card h1{
+    color:#ee7fae;
+    font-family:Pacifico,cursive;
+    font-size:clamp(2rem,6vw,4.5rem);
+    margin-bottom:25px;
+}
+
+.message-card p{
+    font-size:clamp(1rem,2.5vw,1.35rem);
+    line-height:1.8;
+}
+
+.signature{
+    margin-top:25px;
+    color:#ee7fae;
+    font-family:Pacifico,cursive;
+    font-size:1.8rem;
+}
+
+/* =====================================================
+   FINAL EXPLOSION
+===================================================== */
+
+#finalExplosion{
+    position:absolute;
+    inset:0;
+    z-index:1000;
+    pointer-events:none;
+    opacity:0;
+}
+
+#finalExplosion.active{
+    animation:explosionFlash 2.5s forwards;
+}
+
+@keyframes explosionFlash{
+    0%{opacity:0}
+    15%{opacity:1;background:white}
+    25%{opacity:.4;background:#9be6ff}
+    100%{opacity:0}
+}
+
+.explosion-particle{
+    position:absolute;
+    left:50%;
+    top:50%;
+    font-size:clamp(1.5rem,5vw,4rem);
+    animation:explode 2s cubic-bezier(.15,.8,.2,1) forwards;
+}
+
+@keyframes explode{
+    0%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(.2);
+    }
+    100%{
+        opacity:0;
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            rotate(var(--r))
+            scale(1.3);
+    }
+}
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.next-btn{
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:100;
+    border:none;
+    background:rgba(255,255,255,.9);
+    color:#3d99c7;
+    padding:13px 28px;
+    border-radius:999px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.next-btn:hover{
+    transform:translateX(-50%) translateY(-4px) scale(1.04);
+}
+
+.progress{
+    position:absolute;
+    top:20px;
+    right:20px;
+    z-index:200;
+    display:flex;
+    gap:7px;
+}
+
+.progress span{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:rgba(255,255,255,.4);
+    transition:.4s;
+}
+
+.progress span.active{
+    width:25px;
+    border-radius:999px;
+    background:white;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:600px){
+
+    .character{
+        width:58vw;
+    }
+
+    .cake{
+        transform:translateX(-50%) scale(.8);
+        transform-origin:bottom center;
+    }
+
+    .microphone{
+        left:calc(50% + 55px);
+        bottom:31%;
+        transform:rotate(-12deg) scale(.75);
+    }
+
+    .instrument.piano{
+        left:3%;
+    }
+
+    .instrument.drum{
+        right:3%;
+    }
+
+    .instrument.guitar{
+        left:12%;
+    }
+
+    .message-card{
+        padding:30px 22px;
+    }
+
+    .blow-instruction{
+        font-size:.8rem;
+        max-width:90%;
+        text-align:center;
+        white-space:normal;
+    }
+}
+
+.hidden{
+    display:none!important;
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<!-- ========================
