@@ -1,0 +1,209 @@
+/* style.css
+   Theme variables and base layout
+*/
+:root{
+  --bg: #dff4ff; /* dreamy pastel sky-blue */
+  --bg-deep: #d0eefc;
+  --accent-pink: #ffb6d5;
+  --accent-rose: #ff6b8a;
+  --line-blue: #6fb8ff;
+  --white: #ffffff;
+  --muted: rgba(255,255,255,0.7);
+  --text: #1a2630;
+  --shadow: rgba(26,38,48,0.12);
+  --glass: rgba(255,255,255,0.5);
+  --max-width: 1100px;
+  --safe-pad: 20px;
+  --card-radius: 18px;
+  --ease: cubic-bezier(.2,.9,.25,1);
+}
+
+/* Reset and utilities */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,var(--bg) 0%, #e9f9ff 60%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow:hidden;
+}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Full screen stage container */
+.stages{height:100vh;width:100vw;position:relative;display:flex;flex-direction:column}
+.stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:opacity 900ms var(--ease), transform 900ms var(--ease);opacity:0;pointer-events:none}
+.stage.active{opacity:1;pointer-events:auto;transform:none;z-index:2}
+.stage[hidden]{display:none}
+
+/* Background layers */
+.sky-bg{position:absolute;inset:0;background:radial-gradient(circle at 20% 20%, #eaf9ff, transparent 30%), linear-gradient(180deg,var(--bg) 0%, #e6f8ff 100%);overflow:hidden}
+.sky-bg.subtle{background:linear-gradient(180deg,#eaf7ff,#e8fbff)}
+.sky-bg.romantic{background:linear-gradient(180deg,#f6eefe,#e7f7ff)}
+.sky-bg.final{background:linear-gradient(180deg,#eaf7fb, #f5faff)}
+
+/* canvas sparkles and particle canvases occupy the background */
+.sparkles-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+/* Stage inner content */
+.stage-inner{position:relative;z-index:3;width:100%;max-width:var(--max-width);padding:var(--safe-pad);margin:auto;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.stage-inner.center{align-items:center;text-align:center}
+
+/* Controls and buttons */
+.controls{margin-top:18px;display:flex;gap:12px;align-items:center;justify-content:center}
+.btn{background:var(--white);border:2px solid var(--muted);padding:12px 18px;border-radius:14px;cursor:pointer;box-shadow:0 6px 18px var(--shadow);font-weight:600;transition:transform 220ms var(--ease),box-shadow 220ms}
+.btn:active{transform:translateY(2px) scale(.995)}
+.btn-primary{background:linear-gradient(180deg,var(--white),#fff);border-color:var(--line-blue);color:var(--text)}
+.btn-secondary{background:transparent;border-color:transparent;color:var(--text)}
+.music-toggle{position:fixed;right:14px;top:14px;z-index:40;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.6);backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;gap:8px;align-items:center;font-weight:700}
+
+/* Greeting text */
+.greeting{font-size:clamp(36px,6vw,72px);letter-spacing:2px;color:var(--line-blue);text-shadow:0 8px 28px rgba(111,184,255,0.22);font-weight:900;margin-top:14px;opacity:0;transform:translateY(12px) scale(.98);transition:opacity 450ms var(--ease),transform 450ms var(--ease);pointer-events:none}
+.greeting.visible{opacity:1;transform:translateY(0) scale(1);animation:gentle-bounce 3s ease-in-out infinite}
+
+/* Gentle bounce for greeting */
+@keyframes gentle-bounce{
+  0%,100%{transform:translateY(0) scale(1);filter:drop-shadow(0 6px 24px rgba(111,184,255,0.08))}
+  50%{transform:translateY(-10px) scale(1.02)}
+}
+
+/* Hero (puppy) styling - built with CSS shapes */
+/* shared puppy blocks used across stages: .puppy inside different containers */
+.puppy{--size:220px;position:relative;width:var(--size);height:calc(var(--size)*1.2);transform-origin:center bottom;transition:transform 500ms var(--ease)}
+.puppy.small{--size:150px}
+.puppy.medium{--size:280px}
+.puppy .head{position:absolute;left:50%;transform:translateX(-50%);top:0;width:58%;height:58%;display:flex;align-items:center;justify-content:center;z-index:5}
+.puppy .face{position:relative;background:var(--white);width:100%;height:100%;border-radius:50%;border:6px solid var(--line-blue);box-shadow:0 8px 30px rgba(16,38,60,0.06);display:flex;align-items:center;justify-content:center}
+.puppy .ears{position:absolute;width:40%;height:120%;background:var(--white);border-radius:50%;border:6px solid var(--line-blue);top:24%;z-index:2;box-shadow:0 8px 24px rgba(111,184,255,0.06)}
+.puppy .ears.left{left:-12%;transform-origin:left top;transform:rotate(-8deg)}
+.puppy .ears.right{right:-12%;transform-origin:right top;transform:rotate(8deg)}
+.puppy .tail{position:absolute;right:-6%;bottom:28%;width:36px;height:36px;border-radius:50%;background:transparent;border:6px solid var(--line-blue);transform:rotate(30deg);box-shadow:inset -4px -4px 8px rgba(0,0,0,0.03)}
+.puppy .body{position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:72%;height:60%;display:flex;align-items:flex-end;justify-content:center;z-index:3}
+.puppy .belly{width:82%;height:70%;background:linear-gradient(180deg,var(--white),#f9fbff);border-radius:50%;border:6px solid var(--line-blue)}
+.puppy .legs{position:absolute;bottom:-4%;display:flex;gap:10px}
+.puppy .leg{width:36px;height:40px;background:var(--white);border-radius:18px;border:6px solid var(--line-blue);box-shadow:0 6px 14px rgba(0,0,0,0.06)}
+.puppy .face .eyes{width:28px;height:28px;background:linear-gradient(180deg,#dff6ff,#cfefff);border-radius:50%;border:4px solid var(--line-blue);position:relative;margin:0 12px;box-shadow:0 6px 14px rgba(111,184,255,0.12)}
+.puppy .face .eyes .sparkle{position:absolute;top:6px;left:8px;width:6px;height:6px;border-radius:2px;background:var(--white);box-shadow:0 0 8px rgba(255,255,255,0.9)}
+.puppy .face .mouth{position:absolute;bottom:20%;font-weight:900;color:var(--line-blue);font-family:serif;font-size:26px}
+.puppy .face .blush{position:absolute;bottom:13%;width:28px;height:18px;background:linear-gradient(180deg,var(--accent-pink),var(--accent-rose));border-radius:50%;opacity:.95}
+.puppy .face .left-blush{left:12%}
+.puppy .face .right-blush{right:12%}
+
+/* hero pop-in animation */
+#hero{transform-origin:50% 100%;animation:hero-pop 900ms var(--ease) 400ms both}
+@keyframes hero-pop{from{transform:translateY(40vh) scale(.8) rotate(-6deg);opacity:0}to{transform:translateY(0) scale(1) rotate(0);opacity:1}}
+
+/* cake on hero */
+.cake{position:absolute;bottom:44%;left:50%;transform:translateX(-50%);width:120px;height:68px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cake-top{width:86%;height:38px;background:linear-gradient(180deg,#fff5f8,#ffeef3);border-radius:12px;border:4px solid var(--line-blue);box-shadow:0 6px 18px rgba(255,127,164,0.06)}
+.cake-body{width:96%;height:30px;background:linear-gradient(180deg,#fff4f8,#fff1f5);border-radius:8px;border:4px solid var(--line-blue);margin-top:4px}
+
+/* friends row styling (Stage1 and Stage3 variations) */
+.friends{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:flex-end;justify-content:center;width:100%;max-width:1200px;pointer-events:none}
+.friends .friend{width:58px;height:78px;background:var(--white);border-radius:14px;border:4px solid var(--line-blue);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:10px;box-shadow:0 10px 30px rgba(16,38,60,0.04)}
+.friends-10 .friend{transform-origin:center bottom;animation:friend-entrance 800ms var(--ease) both}
+@keyframes friend-entrance{from{transform:translateY(40px) scale(.92);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.friends .friend .face{width:28px;height:24px;border-radius:12px;background:linear-gradient(180deg,#fff,#f6fbff);border:3px solid var(--line-blue);margin-bottom:6px;position:relative}
+.friends .friend .eyes{position:absolute;top:6px;left:6px;width:6px;height:6px;border-radius:50%;background:#5db8ff;box-shadow:0 0 8px rgba(111,184,255,0.5)}
+.friends .friend .mouth{position:absolute;bottom:4px;left:9px;width:12px;height:6px;border-radius:8px;background:transparent;color:var(--line-blue);font-weight:800;text-align:center}
+.friends .friend .hands{width:100%;height:12px;position:relative;bottom:-6px}
+.friends .friend .gift{position:absolute;bottom:6px;right:6px;width:18px;height:14px;background:linear-gradient(180deg,#fff8ee,#fff1e6);border-radius:4px;border:2px solid var(--line-blue)}
+/* Clap animation */
+.friend.clap,.friends .friend{animation:clap 1200ms var(--ease) infinite;}
+@keyframes clap{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(-1deg)}100%{transform:translateY(0) rotate(0)}}
+
+/* confetti container */
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+/* confetti elements generated via JS will use .confetti-piece */
+
+/* sparkles for subtle twinkle */
+.sparkles{position:absolute;inset:0;pointer-events:none}
+
+/* cake scene (Stage2) */
+.cake-scene{display:flex;align-items:center;justify-content:center;height:360px}
+.heart-cake{position:relative;width:360px;height:320px;transform:scale(.7);transition:transform 500ms var(--ease)}
+@media (max-width:700px){.heart-cake{transform:scale(.55)}}
+.heart-cake:before,.heart-cake:after{
+  content:"";position:absolute;top:0;width:180px;height:180px;border-radius:50%;background:linear-gradient(180deg,#fff,#fff7fb);border:6px solid var(--line-blue)
+}
+.heart-cake:before{left:50px;transform:rotate(-30deg)}
+.heart-cake:after{right:50px;transform:rotate(30deg)}
+.heart-cake .cake-decoration{position:absolute;left:50%;top:42%;transform:translateX(-50%);width:260px;height:200px;background:linear-gradient(180deg,#fff4f8,#fff1f5);border-radius:40% 40% 60% 60%/45% 45% 55% 55%;border:6px solid var(--line-blue);box-shadow:0 20px 50px rgba(111,184,255,0.08)}
+.cake-number{position:absolute;top:-20px;left:50%;transform:translateX(-50%);display:flex;gap:18px;align-items:flex-end;z-index:8}
+.cake-number .num{position:relative;font-weight:900;color:var(--accent-rose);font-size:72px;line-height:1;font-family:serif;text-shadow:0 6px 18px rgba(255,107,138,0.12)}
+.cake-number .num .flame{position:absolute;left:50%;transform:translateX(-50%);top:-28px;display:block;width:12px;height:18px;border-radius:50% 50% 40% 40%;background:linear-gradient(180deg,#ffdf6b,#ff6b6b);box-shadow:0 4px 12px rgba(255,107,138,0.14);filter:blur(.2px);animation:flicker 400ms linear infinite}
+@keyframes flicker{
+  0%{transform:translateX(-50%) translateY(0) scaleY(1)}
+  30%{transform:translateX(-50%) translateY(-2px) scaleY(.95)}
+  60%{transform:translateX(-50%) translateY(1px) scaleY(1.04)}
+  100%{transform:translateX(-50%) translateY(0) scaleY(1)}
+}
+/* extinguished flames */
+.flame.extinguished{animation:none;opacity:0;transform:translateX(-50%) scale(.6) translateY(-2px)}
+
+/* mic button styling */
+.wish-text{font-size:22px;color:#1b2f3d;margin-top:12px}
+.after-wish{margin-top:12px}
+
+/* Stage 3 theater */
+.theater-bg{position:absolute;inset:0;background:linear-gradient(0deg,#cfefff 0%, #eaf6ff 100%);overflow:hidden}
+.spotlight{position:absolute;left:50%;transform:translateX(-50%);top:10%;width:55vw;height:55vw;border-radius:50%;background:radial-gradient(circle at 50% 20%, rgba(255,255,255,0.95), transparent 35%);filter:blur(40px);opacity:.8;mix-blend-mode:screen}
+.stage-topline{font-size:20px;margin-bottom:12px;color:var(--line-blue);font-weight:700;text-shadow:0 8px 24px rgba(111,184,255,0.06)}
+.puppy-stage{display:flex;flex-direction:column;align-items:center;gap:14px;z-index:5}
+.mic-stand{width:6px;height:80px;background:linear-gradient(180deg,#e6f7ff,#d9f1ff);border-radius:4px;box-shadow:0 8px 30px rgba(0,0,0,0.06)}
+
+/* Friends for stage3 — more dense row */
+.friends-20{position:relative;margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;max-width:900px}
+.friends-20 .friend{width:46px;height:66px;border-radius:12px;border:4px solid var(--line-blue);background:linear-gradient(180deg,#fff,#f8fdff);animation:band-move 1200ms var(--ease) infinite}
+@keyframes band-move{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+
+/* Stage 4 cinematic */
+.cinematic-scene{width:100%;display:flex;flex-direction:column;align-items:center;gap:12px}
+.puppy-walk{position:relative;transform:translateY(40vh) scale(.7);transition:transform 1500ms var(--ease)}
+.puppy-walk.walked{transform:translateY(0) scale(1)}
+.bouquet{position:absolute;left:50%;bottom:5%;transform:translateX(-50%) scale(.9);width:160px;height:200px;display:flex;align-items:flex-end;justify-content:center;transition:transform 800ms var(--ease)}
+.bouquet .roses{width:120px;height:120px;background:radial-gradient(circle at 30% 30%, #ff6b6b 0,#ff3b6b 30%,#c42a3a 100%);border-radius:50%;box-shadow:0 12px 36px rgba(196,42,58,0.18)}
+.bouquet .wrap{position:absolute;bottom:0;width:160px;height:120px;background:linear-gradient(180deg,#fff5f7,#ffdce3);border-radius:16px;border:6px solid var(--line-blue);transform:translateY(10px)}
+.kiss-overlay{position:absolute;inset:0;pointer-events:none}
+
+/* Stage5 final */
+.final-card{padding:28px;background:linear-gradient(180deg,rgba(255,255,255,0.8),#fff);border-radius:20px;box-shadow:0 30px 80px rgba(16,38,60,0.08);max-width:920px}
+.final-message{font-size:18px;line-height:1.6;color:#102031;min-height:180px;max-height:60vh;overflow:auto;padding:12px}
+.final-message .emphasis{display:block;font-size:22px;font-weight:900;color:var(--accent-rose);margin-top:10px}
+
+/* Particles common style */
+.particle{position:absolute;will-change:transform,opacity;pointer-events:none;border-radius:50%}
+
+/* hearts confetti petals styling (JS will assign classes) */
+.heart{width:18px;height:18px;background:var(--accent-rose);transform:rotate(-45deg);border-radius:4px 4px 0 0}
+.flower{width:14px;height:14px;background:radial-gradient(circle,#ffdfeb,#ffd1e0);border-radius:50%}
+.star{width:10px;height:10px;background:linear-gradient(180deg,#fff,#fff2);box-shadow:0 0 10px rgba(255,255,255,0.6);transform:rotate(45deg);}
+
+/* responsive tweaks */
+@media (max-width:880px){
+  .puppy{--size:180px}
+  .greeting{font-size:28px}
+  .stage-inner{padding:12px}
+}
+@media (max-width:560px){
+  body{overflow:auto}
+  .puppy{--size:140px}
+  .friends{bottom:6%}
+  .music-toggle{right:10px;top:10px;padding:8px}
+  .btn{padding:10px 12px;border-radius:12px}
+  .cake-scene{height:260px}
+  .final-message{font-size:16px}
+}
+
+/* small helper animations */
+.fade-in{animation:fadeIn 480ms var(--ease) both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* subtle pulsing glow */
+.pulse{animation:pulseGlow 2.8s ease-in-out infinite}
+@keyframes pulseGlow{0%{box-shadow:0 6px 24px rgba(255,107,138,0.06)}50%{box-shadow:0 18px 54px rgba(255,107,138,0.12)}100%{box-shadow:0 6px 24px rgba(255,107,138,0.06)}}
+
+/* confetti piece style created by JS (example) */
+.confetti-piece{position:absolute;width:10px;height:14px;border-radius:2px;opacity:0.95;transform-origin:center;will-change:transform,opacity}
