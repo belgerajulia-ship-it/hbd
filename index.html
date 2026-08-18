@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+
+  <meta name="theme-color" content="#73c9ef" />
+
+  <title>Happy Birthday, My Love ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=DM+Sans:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main id="app" aria-label="Interactive birthday card">
+
+  <div class="grain"></div>
+
+  <div class="aurora aurora-a"></div>
+  <div class="aurora aurora-b"></div>
+
+
+  <!-- =====================================================
+       INTRO
+  ====================================================== -->
+
+  <section id="intro" class="scene scene-intro active">
+
+    <div class="intro-stars"></div>
+
+    <div class="intro-content">
+
+      <p class="eyebrow">
+        A tiny surprise for you
+      </p>
+
+      <h1>
+        hi <span>babyyy</span> ♡
+      </h1>
+
+      <p class="intro-sub">
+        I made you something special...
+      </p>
+
+      <button class="primary-btn" id="startBtn">
+        open my surprise <span>✦</span>
+      </button>
+
+    </div>
+
+    <div class="floating-heart heart-1">♡</div>
+    <div class="floating-heart heart-2">♡</div>
+    <div class="floating-heart heart-3">♡</div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STAGE 1
+  ====================================================== -->
+
+  <section id="stage1" class="scene stage">
+
+    <div class="stage-bg sky-bg"></div>
+
+    <div class="moon"></div>
+
+    <div class="stars"></div>
+
+    <div class="cloud cloud-a"></div>
+    <div class="cloud cloud-b"></div>
+
+
+    <div class="stage-header">
+      <span class="stage-number">01</span>
+      <span>your special day</span>
+    </div>
+
+
+    <div class="character-frame s1-character">
+
+      <img
+        id="stage1Photo"
+        src="cinnamon-roll.jpg"
+        alt="Birthday character"
+      >
+
+      <div class="cake cake-small">
+
+        <div class="cake-candle">
+          <i></i>
+        </div>
+
+        <div class="cake-top">
+          ♡
+        </div>
+
+        <div class="cake-body"></div>
+
+        <div class="cake-plate"></div>
+
+      </div>
+
+    </div>
+
+
+    <div class="birthday-sign">
+
+      <span class="tiny-label">
+        TODAY IS ALL ABOUT YOU
+      </span>
+
+      <h2>
+        Happy Birthday<br>
+        <em>my love</em> ♡
+      </h2>
+
+    </div>
+
+
+    <div class="confetti" id="confetti1"></div>
+
+    <div class="sparkle-field"></div>
+
+
+    <button
+      class="next-btn"
+      data-next="stage2"
+    >
+      continue <span>→</span>
+    </button>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STAGE 2 — CONCERT
+  ====================================================== -->
+
+  <section id="stage2" class="scene stage theater">
+
+    <div class="curtain curtain-left"></div>
+    <div class="curtain curtain-right"></div>
+
+    <div class="theater-ceiling"></div>
+
+    <div class="spotlight spot-1"></div>
+    <div class="spotlight spot-2"></div>
+
+
+    <div class="stage-header">
+      <span class="stage-number">02</span>
+      <span>the birthday concert</span>
+    </div>
+
+
+    <div class="music-title">
+
+      <span>
+        LIVE FOR ONE VERY SPECIAL PERSON
+      </span>
+
+      <h2>
+        Happy Birthday,
+        <b>bebiii!</b>
+      </h2>
+
+    </div>
+
+
+    <div class="band-floor"></div>
+
+
+    <div class="instrument piano">
+      ♫
+      <span>piano</span>
+    </div>
+
+    <div class="instrument drum">
+      ◉
+      <span>drums</span>
+    </div>
+
+    <div class="instrument guitar">
+      ♬
+      <span>guitar</span>
+    </div>
+
+
+    <div class="character-frame singer">
+
+      <img
+        id="stage2Photo"
+        src="cinnamon-roll.jpg"
+        alt="Singing character"
+      >
+
+      <div class="mic">
+
+        <div class="mic-head"></div>
+
+        <div class="mic-stick"></div>
+
+        <div class="mic-base"></div>
+
+      </div>
+
+
+      <div class="sing-notes">
+        ♪
+      </div>
+
+      <div class="sing-notes n2">
+        ♫
+      </div>
+
+      <div class="sing-notes n3">
+        ♬
+      </div>
+
+    </div>
+
+
+    <div
+      class="equalizer"
+      id="equalizer"
+    ></div>
+
+
+    <div class="audience">
+
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+
+    </div>
+
+
+    <button
+      class="next-btn"
+      data-next="stage3"
+    >
+      next surprise <span>→</span>
+    </button>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STAGE 3 — BLOW THE CAKE
+  ====================================================== -->
+
+  <section id="stage3" class="scene stage blow">
+
+    <div class="cake-world"></div>
+
+
+    <!-- Optional uploaded image -->
+    <img
+      id="stage3Photo"
+      class="stage3-photo"
+      src=""
+      alt=""
+      aria-hidden="true"
+    >
+
+
+    <div class="stage-header">
+      <span class="stage-number">03</span>
+      <span>make a wish</span>
+    </div>
+
+
+    <div class="blow-copy">
+
+      <span>
+        TAKE A DEEP BREATH...
+      </span>
+
+      <h2>
+        Close your eyes<br>
+        and <em>blow!</em>
+      </h2>
+
+      <p>
+        Tap the cake or press the button
+        to send your wish flying ✦
+      </p>
+
+    </div>
+
+
+    <div
+      class="hero-cake"
+      id="heroCake"
+    >
+
+      <div class="cake-glow"></div>
+
+      <div class="cake-flame"></div>
+
+      <div class="cake-topper">
+        27
+      </div>
+
+
+      <div class="cake-layer top-layer"></div>
+
+      <div class="cake-layer middle-layer"></div>
+
+      <div class="cake-layer bottom-layer"></div>
+
+
+      <div class="icing drip-a"></div>
+      <div class="icing drip-b"></div>
+      <div class="icing drip-c"></div>
+
+
+      <div class="cake-deco d1">
+        ♥
+      </div>
+
+      <div class="cake-deco d2">
+        ♥
+      </div>
+
+      <div class="cake-deco d3">
+        ♥
+      </div>
+
+
+      <div class="plate-big"></div>
+
+    </div>
+
+
+    <div class="wind-ring"></div>
+
+    <div class="blown-stars"></div>
+
+
+    <button
+      class="blow-btn"
+      id="blowBtn"
+    >
+      BLOW THE CANDLES ✦
+    </button>
+
+
+    <button
+      class="next-btn hidden"
+      id="toStage4"
+      data-next="stage4"
+    >
+      one more surprise <span>→</span>
+    </button>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STAGE 4 — BOUQUET + KISS
+  ====================================================== -->
+
+  <section id="stage4" class="scene stage closer">
+
+    <div class="romantic-sky"></div>
+
+    <div class="bokeh"></div>
+
+    <div class="path-glow"></div>
+
+
+    <div class="stage-header">
+      <span class="stage-number">04</span>
+      <span>come a little closer</span>
+    </div>
+
+
+    <div class="bouquet bouquet-back">
+
+      <span>✿</span>
+      <span>❀</span>
+      <span>✾</span>
+      <span>✿</span>
+      <span>❀</span>
+
+    </div>
+
+
+    <div
+      class="walker"
+      id="walker"
+    >
+
+      <img
+        id="stage4Photo"
+        src="cinnamon-roll.jpg"
+        alt="Character coming closer"
+      >
+
+
+      <div
+        class="bouquet bouquet-front"
+        id="bouquet"
+      >
+
+        <span>✿</span>
+        <span>❀</span>
+        <span>✾</span>
+        <span>✿</span>
+        <span>❀</span>
+
+        <div class="wrap"></div>
+
+      </div>
+
+
+      <div
+        class="kiss"
+        id="kiss"
+      >
+        ♡
+      </div>
+
+    </div>
+
+
+    <div
+      class="closer-copy"
+      id="closerCopy"
+    >
+
+      <span>
+        FOR THE MOST BEAUTIFUL GIRL
+      </span>
+
+      <h2>
+        These flowers<br>
+        are for <em>you.</em>
+      </h2>
+
+    </div>
+
+
+    <button
+      class="next-btn"
+      id="walkBtn"
+    >
+      come closer <span>♡</span>
+    </button>
+
+
+    <button
+      class="next-btn hidden"
+      id="kissBtn"
+    >
+      give me a kiss <span>♡</span>
+    </button>
+
+
+    <button
+      class="next-btn hidden"
+      id="toFinal"
+      data-next="finale"
+    >
+      read my heart <span>→</span>
+    </button>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       FINAL MESSAGE
+  ====================================================== -->
+
+  <section id="finale" class="scene final">
+
+    <div class="final-stars"></div>
+
+    <div class="final-orbit orbit-a"></div>
+    <div class="final-orbit orbit-b"></div>
+
+
+    <div class="final-character">
+
+      <img
+        id="finalPhoto"
+        src="cinnamon-roll.jpg"
+        alt="Birthday character"
+      >
+
+    </div>
+
+
+    <div class="message-card">
+
+      <span class="final-kicker">
+        FOR MY FAVORITE PERSON IN THE WHOLE WORLD
+      </span>
+
+
+      <h1>
+        Happy birthday,<br>
+        <em>my gorgeous wife!</em> ❤️
+      </h1>
+
+
+      <div class="message-scroll">
+
+        <p>
+          I’ve been so incredibly happy and grateful
+          since you came into my life.
+        </p>
+
+        <p>
+          Thank you for being my safe place, my home,
+          and my happiness. You deserve every beautiful
+          thing this world has to offer.
+        </p>
+
+        <p>
+          All I ever wish for you is good health,
+          genuine happiness, and for this new chapter
+          of your life to bring you closer to your dreams.
+        </p>
+
+        <p>
+          I will always support u and stand beside you
+          through whatever phase, every dream,
+          and in everything.
+        </p>
+
+        <p class="big-love">
+          Happy 27th Birthday, my love.
+        </p>
+
+        <p>
+          I love you bebiii more than u know
+          and will always love you. ❤️
+        </p>
+
+      </div>
+
+
+      <button
+        class="final-btn"
+        id="finalBtn"
+      >
+        one last wish ✦
+      </button>
+
+    </div>
+
+
+    <div
+      class="final-explosion"
+      id="finalExplosion"
+    ></div>
+
+
+    <div
+      class="end-note"
+      id="endNote"
+    >
+      ♡ forever yours ♡
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+
+  <div
+    class="progress"
+    aria-hidden="true"
+  >
+
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+
+  </div>
+
+
+  <button
+    class="sound-toggle"
+    id="soundToggle"
+    aria-label="Toggle sound"
+  >
+    ♫
+  </button>
+
+
+
+  <!-- =====================================================
+       IMAGE UPLOADER
+  ====================================================== -->
+
+  <button
+    class="upload-toggle"
+    id="uploadToggle"
+    aria-label="Open image uploader"
+  >
+    ＋ Images
+  </button>
+
+
+  <aside
+    class="upload-panel"
+    id="uploadPanel"
+    aria-label="Upload your own images"
+  >
+
+    <div class="upload-panel-head">
+
+      <div>
+
+        <span class="upload-kicker">
+          PERSONALIZE YOUR CARD
+        </span>
+
+        <h3>
+          Upload your photos ♡
+        </h3>
+
+      </div>
+
+
+      <button
+        class="upload-close"
+        id="uploadClose"
+        aria-label="Close uploader"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <p class="upload-help">
+      Add your own images to the scenes.
+      Images stay in this browser and are used instantly.
+    </p>
+
+
+    <label class="upload-row">
+
+      <span class="upload-icon">
+        ①
+      </span>
+
+      <span>
+        <b>Stage 1</b>
+        <small>Birthday cake scene</small>
+      </span>
+
+      <input
+        type="file"
+        accept="image/*"
+        data-upload-target="stage1Photo"
+      >
+
+    </label>
+
+
+    <label class="upload-row">
+
+      <span class="upload-icon">
+        ②
+      </span>
+
+      <span>
+        <b>Stage 2</b>
+        <small>Concert / singing scene</small>
+      </span>
+
+      <input
+        type="file"
+        accept="image/*"
+        data-upload-target="stage2Photo"
+      >
+
+    </label>
+
+
+    <label class="upload-row">
+
+      <span class="upload-icon">
+        ③
+      </span>
+
+      <span>
+        <b>Stage 3</b>
+        <small>Wish / cake scene</small>
+      </span>
+
+      <input
+        type="file"
+        accept="image/*"
+        data-upload-target="stage3Photo"
+      >
+
+    </label>
+
+
+    <label class="upload-row">
+
+      <span class="upload-icon">
+        ④
+      </span>
+
+      <span>
+        <b>Stage 4</b>
+        <small>Bouquet / close-up scene</small>
+      </span>
+
+      <input
+        type="file"
+        accept="image/*"
+        data-upload-target="stage4Photo"
+      >
+
+    </label>
+
+
+    <label class="upload-row">
+
+      <span class="upload-icon">
+        ♡
+      </span>
+
+      <span>
+        <b>Finale</b>
+        <small>Your favorite photo</small>
+      </span>
+
+      <input
+        type="file"
+        accept="image/*"
+        data-upload-target="finalPhoto"
+      >
+
+    </label>
+
+
+    <button
+      class="clear-uploads"
+      id="clearUploads"
+    >
+      Reset uploaded photos
+    </button>
+
+  </aside>
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
