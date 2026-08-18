@@ -1,0 +1,428 @@
+/* style.css
+   Theme variables and layout. Uses responsive units and clamp() for scalability.
+*/
+
+/* Theme colors (easy to customize) */
+:root{
+  --bg: #dff3ff;         /* soft sky blue */
+  --bg-deep: #cbeaf7;
+  --line: #67a6d6;       /* blue outline for character */
+  --white: #ffffff;
+  --pink: #ffd6e1;
+  --accent: #ff6b81;     /* rose red */
+  --gold: #ffd580;
+  --shadow: rgba(0,0,0,0.08);
+  --glass: rgba(255,255,255,0.6);
+  --text: #114055;
+  --muted: #6a8ea6;
+}
+
+/* Reset + body */
+* {box-sizing: border-box;}
+html,body {height:100%;}
+body{
+  margin:0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.12), transparent 10%),
+              linear-gradient(180deg,var(--bg) 0%, var(--bg-deep) 100%);
+  color:var(--text);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Background stars/texture */
+#bg-stars{
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.95) 0.7px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,0.85) 0.9px, transparent 1.5px);
+  background-size: 60px 60px, 90px 90px;
+  pointer-events:none;
+  z-index:0;
+  opacity:0.45;
+  filter: blur(.6px) saturate(1.02);
+}
+
+/* Canvas overlay should cover full screen */
+#particles-canvas{
+  position:fixed;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+}
+
+/* App layout */
+#app{position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center;}
+
+/* Music toggle */
+.control-btn{
+  position:fixed;
+  right:1rem;
+  top:1rem;
+  z-index:40;
+  background:var(--glass);
+  border:2px solid rgba(255,255,255,0.6);
+  padding:.45rem .65rem;
+  border-radius:999px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.09);
+  font-size:1rem;
+  cursor:pointer;
+}
+
+/* Stage container */
+.stage{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(16px,4vw,40px);
+  transition:opacity .9s cubic-bezier(.2,.9,.2,1), transform .8s cubic-bezier(.2,.9,.2,1);
+  opacity:0;
+  transform:scale(.98) translateY(20px);
+  z-index:10;
+  pointer-events:none;
+}
+.stage.active{opacity:1; transform:none; pointer-events:auto;}
+
+/* Scene basics */
+.scene{position:relative; width:100%; max-width:1200px; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1rem; padding:2rem; text-align:center;}
+
+/* Titles and text */
+.large-bounce-title{
+  font-size:clamp(28px,6vw,64px);
+  letter-spacing:4px;
+  color:var(--white);
+  text-shadow:0 6px 18px rgba(103,166,214,0.35), 0 2px 6px rgba(0,0,0,0.06);
+  transform-origin:center;
+  z-index:10;
+  display:inline-block;
+  padding:.35rem .9rem;
+  border-radius:18px;
+  background:linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.24);
+  box-shadow: 0 8px 30px rgba(103,166,214,0.08);
+  opacity:0;
+  animation:titleIn .9s .6s forwards;
+}
+@keyframes titleIn{
+  to{opacity:1; transform:translateY(0) scale(1);}
+  from{opacity:0; transform:translateY(20px) scale(.95);}
+}
+
+/* Puppy character (CSS shapes) */
+.puppy-wrap{position:relative; z-index:12; display:flex; align-items:center; justify-content:center;}
+.puppy{
+  --size:clamp(170px,26vw,320px);
+  width:var(--size);
+  height:calc(var(--size) * 1.05);
+  position:relative;
+  transform-origin:center bottom;
+  transition:transform .6s ease;
+  display:block;
+}
+
+/* Ears */
+.ears{
+  position:absolute;
+  top:10%;
+  width:44%;
+  height:44%;
+  border-radius:50%;
+  background:var(--white);
+  border:6px solid var(--line);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+.ear-left{left:-6%; transform:rotate(-12deg);}
+.ear-right{right:-6%; transform:rotate(12deg);}
+
+/* Head */
+.head{
+  position:absolute;
+  left:50%;
+  top:6%;
+  transform:translateX(-50%);
+  width:62%;
+  height:56%;
+  background:var(--white);
+  border-radius:999px;
+  border:6px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 24px rgba(0,0,0,0.06);
+}
+.eye{
+  width:9%;
+  height:12%;
+  background:#a8d7ff;
+  border-radius:50%;
+  position:absolute;
+  top:42%;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.02);
+}
+.eye.left{left:36%;}
+.eye.right{right:36%;}
+.blush{
+  width:12%;
+  height:8%;
+  background:var(--pink);
+  border-radius:50%;
+  position:absolute;
+  top:58%;
+  opacity:0.95;
+}
+.blush.left{left:24%;}
+.blush.right{right:24%;}
+.mouth{
+  position:absolute;
+  bottom:18%;
+  font-weight:700;
+  color:#5aa0da;
+  transform:translateY(6px) scale(1.2);
+  font-family: "Georgia", serif;
+  font-size:18px;
+}
+
+/* Body */
+.body{
+  position:absolute;
+  bottom:6%;
+  left:50%;
+  transform:translateX(-50%);
+  width:60%;
+  height:44%;
+  background:var(--white);
+  border-radius:50px;
+  border:6px solid var(--line);
+  display:block;
+}
+.leg{
+  position:absolute;
+  bottom:-2%;
+  width:18%;
+  height:22%;
+  background:var(--white);
+  border-radius:50%;
+  border:6px solid var(--line);
+}
+.leg.left{left:12%;}
+.leg.right{right:12%;}
+.tail{
+  position:absolute;
+  left:6%;
+  bottom:40%;
+  width:22%;
+  height:22%;
+  background:var(--white);
+  border-radius:50%;
+  border:6px solid var(--line);
+  transform:rotate(-18deg);
+}
+
+/* Stage1 cake */
+.cake-stage1{
+  position:absolute;
+  top:52%;
+  left:50%;
+  transform:translateX(-50%);
+  width:56%;
+  height:34%;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  pointer-events:none;
+}
+.cake-top{
+  width:72%;
+  height:58%;
+  background:linear-gradient(180deg,#fff 0%, #fff0 80%);
+  border-radius:14px;
+  border:4px solid #ffd6e1;
+  box-shadow: 0 6px 18px rgba(255,160,170,0.08);
+}
+.cake-candles{position:absolute; top:-10%; display:flex; gap:6px;}
+.candle{
+  width:6px; height:18px; background:var(--line); border-radius:3px; position:relative;
+}
+.candle::after{
+  content:''; position:absolute; top:-12px; left:50%; transform:translateX(-50%); width:8px; height:10px; background:linear-gradient(180deg,#ffd580,#ffb347); border-radius:50% 50% 30% 30%;
+  box-shadow: 0 0 8px rgba(255,180,80,0.9);
+  animation:flameFlicker .9s infinite;
+}
+@keyframes flameFlicker{ 0%{transform:translateX(-50%) scaleY(1);}50%{transform:translateX(-50%) scaleY(.85);}100%{transform:translateX(-50%) scaleY(1);}}
+
+/* Buttons / CTAs */
+.cta{
+  background:linear-gradient(180deg,var(--white), #fff9);
+  border:2px solid rgba(255,255,255,0.7);
+  padding:.7rem 1rem;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:1rem;
+  box-shadow: 0 6px 20px rgba(17,64,85,0.08);
+  transition:transform .18s ease, box-shadow .18s;
+}
+.cta:active{transform:translateY(1px) scale(.995);}
+
+/* Friends area (stage1) */
+.friends-area{
+  width:100%;
+  max-width:1100px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  z-index:11;
+  padding:1rem;
+}
+.friend{
+  width:clamp(46px,7vw,80px);
+  height:clamp(46px,7vw,80px);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:4px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+  border:2px solid rgba(255,255,255,0.5);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  transform-origin:center bottom;
+  opacity:0;
+}
+
+/* friend emoji face */
+.friend .face{font-size:clamp(14px,3vw,20px);}
+.friend .gift{font-size:14px; transform:translateY(0);}
+
+/* Stage 2 heart cake */
+.heart-cake{
+  position:relative;
+  width:clamp(240px,40vw,420px);
+  height:clamp(180px,30vw,320px);
+  background:var(--white);
+  border-radius:48% 48% 50% 50% / 50% 50% 40% 40%;
+  border:6px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  box-shadow: 0 18px 46px rgba(17,64,85,0.08);
+}
+.cake-number{
+  font-weight:800;
+  font-size:clamp(36px,8vw,72px);
+  color:transparent;
+  -webkit-text-stroke:6px #ffd6e1;
+  position:relative;
+  z-index:6;
+  padding-top:40px;
+}
+.flame{
+  position:absolute;
+  width:18px;
+  height:18px;
+  top:10%;
+  border-radius:50%;
+  filter:drop-shadow(0 8px 16px rgba(255,180,80,0.25));
+}
+.flame::before{
+  content:'';
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  top:0;
+  width:12px; height:20px;
+  background:linear-gradient(180deg,#fff0,#ffd580,#ffb347);
+  border-radius:50% 50% 40% 40%;
+  animation:flameFlicker 0.9s infinite;
+}
+.flame-2{ left:38%;}
+.flame-7{ right:38%;}
+.flame.out{opacity:0; transform:translateY(-10px) scaleY(.2); transition:all .6s ease;}
+
+/* Mic area */
+.blow-controls{margin-top:1rem; display:flex; gap:.8rem; align-items:center; justify-content:center;}
+.mic-status{font-size:.9rem; color:var(--muted);}
+
+/* wish */
+.wish-made{margin-top:1rem; color:var(--accent); font-weight:700;}
+
+/* Stage 3 */
+.stage3 .spotlight{
+  width:40vw; height:100vh;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.6), rgba(255,255,255,0.04) 40%, transparent 60%);
+  position: absolute; top:-10vh; left:50%; transform:translateX(-50%) rotate(-5deg); z-index:6; pointer-events:none;
+  filter:blur(24px);
+}
+.stage3 .lyrics{
+  position: absolute; bottom:14vh; left:50%; transform:translateX(-50%);
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  padding:.4rem .8rem; border-radius:999px; border:1px solid rgba(255,255,255,0.2);
+  font-weight:700; color:var(--white);
+  z-index:12;
+}
+
+/* Stage3 friends styling: denser */
+.stage3-friends{ position:absolute; inset:auto 0 0 0; display:flex; flex-wrap:wrap; gap:8px; padding:2rem; justify-content:center; z-index:7; pointer-events:none; opacity:.9;}
+
+/* Singing mic prop */
+.mic{position:absolute; width:28px; height:40px; background:linear-gradient(#2f85b9,#1b789f); border-radius:20px; left:50%; transform:translateX(-50%); bottom:20%; box-shadow:0 6px 18px rgba(0,0,0,0.12);}
+
+/* Stage 4 approach */
+.approach-stage{position:relative; width:100%; height:60vh; display:flex; align-items:flex-end; justify-content:center;}
+.puppy.far{ --size:160px; transition:transform 2.8s cubic-bezier(.2,.9,.2,1), width 2.8s; transform:translateY(0) scale(.6); }
+.puppy.approaching{ transform:translateY(-12vh) scale(1.02); z-index:12;}
+
+/* bouquet */
+.bouquet{ position:absolute; bottom:18%; left:58%; transform:translateX(-10%); width:54px; height:48px; border-radius:8px; background:linear-gradient(180deg,#ffeef0,#ffd6de); border:2px solid rgba(255,107,129,0.12);}
+.bouquet .roses{ width:100%; height:100%; background:
+  radial-gradient(circle at 20% 20%, #ff6b81 10%, transparent 11%),
+  radial-gradient(circle at 80% 20%, #ff3b5c 10%, transparent 11%),
+  radial-gradient(circle at 50% 60%, #ff8796 12%, transparent 13%); border-radius:6px;}
+
+/* floating final hearts and message */
+.for-you-text{ font-size:1.4rem; margin-top:1rem; color:var(--accent); }
+.final-scene{display:flex; align-items:center; justify-content:center; padding:2rem;}
+
+/* romantic overlay */
+.romantic-overlay{
+  position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,0,60,0.02));
+  z-index:8; pointer-events:none;
+}
+
+/* final message layout */
+.final-content{ position:relative; z-index:22; max-width:900px; width:100%; padding:2rem; background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border-radius:18px; border:1px solid rgba(255,255,255,0.12); box-shadow:0 18px 60px rgba(17,64,85,0.08); }
+.final-message{ font-size:clamp(16px,2.6vw,20px); color:var(--white); text-align:left; line-height:1.6; white-space:pre-wrap; opacity:0; }
+
+/* utility hidden */
+.hidden{display:none !important;}
+
+/* responsive adjustments */
+@media (max-width:680px){
+  .friends-area{gap:8px;}
+  .friend{width:56px;height:56px;}
+  .control-btn{right:.6rem;top:.6rem;padding:.4rem .6rem;}
+  .lyrics{font-size:14px;}
+  .final-content{padding:1rem;}
+  .cta{padding:.6rem .8rem; font-size:.95rem;}
+}
+
+/* subtle glows */
+.glow {
+  filter: drop-shadow(0 8px 28px rgba(255,200,220,0.18));
+}
+
+/* small animation helpers */
+.pulse{
+  animation: pulseAnim 2s infinite;
+}
+@keyframes pulseAnim{
+  0%{transform:scale(1); opacity:1;}
+  50%{transform:scale(1.02); opacity:.9;}
+  100%{transform:scale(1); opacity:1;}
+}
