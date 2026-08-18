@@ -1,0 +1,87 @@
+:root{
+  --bg:#cfefff;
+  --accent:#5aa6e6;
+  --soft:#7dbef0;
+  --pink:#ffd0de;
+  --white:#ffffff;
+  --text:#123;
+  --card-bg: rgba(255,255,255,0.7);
+  --glass: rgba(255,255,255,0.65);
+}
+
+*{box-sizing:border-box}
+html,body,#page{height:100%;margin:0;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--text)}
+body{background:linear-gradient(180deg,var(--bg),#e0f7ff);overflow:hidden}
+
+.bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* Controls */
+.controls{position:fixed;right:14px;top:14px;z-index:60;display:flex;gap:8px}
+.control-btn{background:var(--glass);border:1px solid rgba(90,166,230,0.2);padding:10px 14px;border-radius:999px;font-weight:600;cursor:pointer;backdrop-filter: blur(6px)}
+.control-btn:active{transform:scale(.98)}
+
+/* Intro overlay */
+.overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:50}
+.center-stage{flex-direction:column;background:transparent}
+.overlay h1{font-size:clamp(20px,4vw,32px);margin:0 0 8px;text-align:center}
+.overlay p.sub{margin:0 0 16px;color:#0b3b57;opacity:.85}
+.big-btn{background:linear-gradient(180deg,var(--soft),var(--accent));color:white;border:none;padding:12px 22px;border-radius:14px;font-size:18px;cursor:pointer;box-shadow:0 10px 24px rgba(90,166,230,0.18)}
+.big-btn:active{transform:translateY(2px)}
+
+/* Stage root */
+.stage-root{position:relative;z-index:10;height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
+.scene{width:100%;max-width:1100px;height:84vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:18px;margin:24px auto;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));box-shadow: 0 6px 30px rgba(20,40,60,0.08)}
+.friends{position:absolute;left:6%;right:6%;top:10%;height:60%;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center;gap:8px;pointer-events:none}
+
+/* friend avatars (simple circles with ears) */
+.friend{width:56px;height:82px;display:flex;align-items:flex-end;justify-content:center;transform-origin:center;transition:transform .5s ease}
+.friend svg{width:100%;height:auto;display:block;}
+
+/* cinnamon */
+.cinnamon{position:relative;z-index:20;display:flex;align-items:center;justify-content:center;transform:translateY(40px);transition:transform .9s cubic-bezier(.2,.9,.1,1)}
+.cinnamon.pop{transform:translateY(-20px) scale(1.02)}
+#cinn-svg{width:240px;height:auto;display:block;}
+
+/* cake holder */
+.cake-holder{position:absolute;bottom:12%;left:50%;transform:translateX(-50%);z-index:18}
+.cake{width:400px;max-width:80vw;margin:0 auto;display:block;}
+
+/* banner */
+.banner{position:absolute;top:6%;left:50%;transform:translateX(-50%) scale(.9);font-weight:900;letter-spacing:6px;z-index:30;color:rgba(255,255,255,0.98);text-shadow:0 6px 24px rgba(10,30,50,0.25);font-size:clamp(18px,4vw,46px);opacity:0;transition:opacity .8s ease,transform .8s ease}
+.banner.show{opacity:1;transform:translateX(-50%) scale(1)}
+
+/* particles container */
+.particles{position:absolute;inset:0;pointer-events:none;z-index:25}
+
+/* stage msg */
+.stage-msg{position:absolute;left:50%;transform:translateX(-50%);bottom:6%;z-index:35;background:var(--card-bg);padding:10px 14px;border-radius:12px;border:1px solid rgba(20,60,90,0.06)}
+
+/* final modal */
+.final-card{max-width:720px;padding:22px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.85));border-radius:14px;box-shadow:0 20px 50px rgba(10,20,40,.2)}
+.final-card h2{margin:0 0 12px}
+.message{margin:8px 0;color:#123}
+
+/* footer */
+.footer{position:fixed;left:12px;bottom:12px;color:#0b3b57;z-index:70}
+
+/* hidden helper */
+.hidden{display:none}
+
+/* animations for friends */
+@keyframes clap {
+  0%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-6px) rotate(-2deg)}
+  100%{transform:translateY(0) rotate(0)}
+}
+.friend.clap{animation:clap 900ms ease-in-out infinite}
+
+/* confetti/heart shapes using utility classes */
+.particle{position:absolute;will-change:transform,opacity;pointer-events:none}
+
+/* responsive */
+@media (max-width:700px){
+  .friends{top:6%}
+  #cinn-svg{width:180px}
+  .friend{width:44px;height:66px}
+  .banner{font-size:24px;letter-spacing:3px}
+}
